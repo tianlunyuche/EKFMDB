@@ -8,12 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		221DA7E3225EEE1A0068FCC8 /* EKFMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7E1225EEE1A0068FCC8 /* EKFMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		221DA7F3225EEE380068FCC8 /* EKWDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7E9225EEE370068FCC8 /* EKWDB.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		221DA7F4225EEE380068FCC8 /* EKWTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7EA225EEE370068FCC8 /* EKWTool.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		221DA7F5225EEE380068FCC8 /* EKWDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DA7EB225EEE370068FCC8 /* EKWDB.m */; };
+		221DA7F6225EEE380068FCC8 /* NSObject+EKWModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7EC225EEE380068FCC8 /* NSObject+EKWModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		221DA7F7225EEE380068FCC8 /* NSObject+EKWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DA7ED225EEE380068FCC8 /* NSObject+EKWModel.m */; };
+		221DA7F8225EEE380068FCC8 /* NSCache+EKWCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7EE225EEE380068FCC8 /* NSCache+EKWCache.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		221DA7F9225EEE380068FCC8 /* EKWTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DA7EF225EEE380068FCC8 /* EKWTool.m */; };
+		221DA7FB225EEE380068FCC8 /* EKWDBConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		221DA7FC225EEE380068FCC8 /* NSCache+EKWCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */; };
+		78B70523862FC92B4700CA87 /* Pods_EKFMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5C5C24BDFED93FD395E7E1 /* Pods_EKFMDB.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14D55B0519386C26FA631057 /* Pods-EKFMDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKFMDB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EKFMDB/Pods-EKFMDB.debug.xcconfig"; sourceTree = "<group>"; };
 		221DA7DE225EEE1A0068FCC8 /* EKFMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EKFMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		221DA7E1225EEE1A0068FCC8 /* EKFMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EKFMDB.h; sourceTree = "<group>"; };
 		221DA7E2225EEE1A0068FCC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		221DA7E9225EEE370068FCC8 /* EKWDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKWDB.h; sourceTree = "<group>"; };
+		221DA7EA225EEE370068FCC8 /* EKWTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKWTool.h; sourceTree = "<group>"; };
+		221DA7EB225EEE370068FCC8 /* EKWDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKWDB.m; sourceTree = "<group>"; };
+		221DA7EC225EEE380068FCC8 /* NSObject+EKWModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+EKWModel.h"; sourceTree = "<group>"; };
+		221DA7ED225EEE380068FCC8 /* NSObject+EKWModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EKWModel.m"; sourceTree = "<group>"; };
+		221DA7EE225EEE380068FCC8 /* NSCache+EKWCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCache+EKWCache.h"; sourceTree = "<group>"; };
+		221DA7EF225EEE380068FCC8 /* EKWTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKWTool.m; sourceTree = "<group>"; };
+		221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKWDBConfig.h; sourceTree = "<group>"; };
+		221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCache+EKWCache.m"; sourceTree = "<group>"; };
+		4B5C5C24BDFED93FD395E7E1 /* Pods_EKFMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EKFMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99CFE593D3C7E54E782E0354 /* Pods-EKFMDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKFMDB.release.xcconfig"; path = "Pods/Target Support Files/Pods-EKFMDB/Pods-EKFMDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78B70523862FC92B4700CA87 /* Pods_EKFMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +55,8 @@
 			children = (
 				221DA7E0225EEE1A0068FCC8 /* EKFMDB */,
 				221DA7DF225EEE1A0068FCC8 /* Products */,
+				39E1C9C4F6C757985DD33602 /* Pods */,
+				87F11586B4A11994A4AAF957 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -46,10 +71,36 @@
 		221DA7E0225EEE1A0068FCC8 /* EKFMDB */ = {
 			isa = PBXGroup;
 			children = (
+				221DA7E9225EEE370068FCC8 /* EKWDB.h */,
+				221DA7EB225EEE370068FCC8 /* EKWDB.m */,
+				221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */,
+				221DA7EA225EEE370068FCC8 /* EKWTool.h */,
+				221DA7EF225EEE380068FCC8 /* EKWTool.m */,
+				221DA7EE225EEE380068FCC8 /* NSCache+EKWCache.h */,
+				221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */,
+				221DA7EC225EEE380068FCC8 /* NSObject+EKWModel.h */,
+				221DA7ED225EEE380068FCC8 /* NSObject+EKWModel.m */,
 				221DA7E1225EEE1A0068FCC8 /* EKFMDB.h */,
 				221DA7E2225EEE1A0068FCC8 /* Info.plist */,
 			);
 			path = EKFMDB;
+			sourceTree = "<group>";
+		};
+		39E1C9C4F6C757985DD33602 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				14D55B0519386C26FA631057 /* Pods-EKFMDB.debug.xcconfig */,
+				99CFE593D3C7E54E782E0354 /* Pods-EKFMDB.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		87F11586B4A11994A4AAF957 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B5C5C24BDFED93FD395E7E1 /* Pods_EKFMDB.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,6 +110,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221DA7FB225EEE380068FCC8 /* EKWDBConfig.h in Headers */,
+				221DA7F6225EEE380068FCC8 /* NSObject+EKWModel.h in Headers */,
+				221DA7F3225EEE380068FCC8 /* EKWDB.h in Headers */,
+				221DA7F4225EEE380068FCC8 /* EKWTool.h in Headers */,
+				221DA7F8225EEE380068FCC8 /* NSCache+EKWCache.h in Headers */,
 				221DA7E3225EEE1A0068FCC8 /* EKFMDB.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,10 +126,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 221DA7E6225EEE1A0068FCC8 /* Build configuration list for PBXNativeTarget "EKFMDB" */;
 			buildPhases = (
+				F688F16CFEBDF3E8318F0545 /* [CP] Check Pods Manifest.lock */,
 				221DA7D9225EEE1A0068FCC8 /* Headers */,
 				221DA7DA225EEE1A0068FCC8 /* Sources */,
 				221DA7DB225EEE1A0068FCC8 /* Frameworks */,
 				221DA7DC225EEE1A0068FCC8 /* Resources */,
+				E8481B2FAE3774368BED3AEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,11 +183,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E8481B2FAE3774368BED3AEB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EKFMDB/Pods-EKFMDB-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F688F16CFEBDF3E8318F0545 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EKFMDB-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		221DA7DA225EEE1A0068FCC8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221DA7FC225EEE380068FCC8 /* NSCache+EKWCache.m in Sources */,
+				221DA7F5225EEE380068FCC8 /* EKWDB.m in Sources */,
+				221DA7F9225EEE380068FCC8 /* EKWTool.m in Sources */,
+				221DA7F7225EEE380068FCC8 /* NSObject+EKWModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +354,7 @@
 		};
 		221DA7E7225EEE1A0068FCC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14D55B0519386C26FA631057 /* Pods-EKFMDB.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -280,6 +379,7 @@
 		};
 		221DA7E8225EEE1A0068FCC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CFE593D3C7E54E782E0354 /* Pods-EKFMDB.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
