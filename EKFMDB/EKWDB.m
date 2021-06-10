@@ -45,7 +45,7 @@ static EKWDB* EKWdb = nil;
     return EKWdb;
 }
 
--(instancetype)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         //创建信号量.
@@ -55,7 +55,7 @@ static EKWDB* EKWdb = nil;
     return self;
 }
 
--(void)dealloc{
+- (void)dealloc {
     //烧毁数据.
     if (_semaphore) {
         _semaphore = 0x00;
@@ -66,7 +66,7 @@ static EKWDB* EKWdb = nil;
     }
 }
 
--(FMDatabaseQueue *)queue{
+- (FMDatabaseQueue *)queue {
     if(_queue)return _queue;
     _queue = [FMDatabaseQueue databaseQueueWithPath:self.dbPath];
     return _queue;
@@ -87,7 +87,7 @@ static EKWDB* EKWdb = nil;
 /**
  创建表(如果存在则不创建).
  */
--(void)createTableWithTableName:(NSString* _Nonnull)name keys:(NSArray<NSString*>* _Nonnull)keys unionPrimaryKeys:(NSArray* _Nullable)unionPrimaryKeys uniqueKeys:(NSArray* _Nullable)uniqueKeys complete:(ekw_complete_B)complete {
+- (void)createTableWithTableName:(NSString* _Nonnull)name keys:(NSArray<NSString*>* _Nonnull)keys unionPrimaryKeys:(NSArray* _Nullable)unionPrimaryKeys uniqueKeys:(NSArray* _Nullable)uniqueKeys complete:(ekw_complete_B)complete {
     NSAssert(name,@"表名不能为空!");
     NSAssert(keys,@"字段数组不能为空!");
     //创表
@@ -150,7 +150,7 @@ static EKWDB* EKWdb = nil;
 /**
  查询对象.
  */
--(void)queryObjectWithTableName:(NSString* _Nonnull)tablename class:(__unsafe_unretained _Nonnull Class)cla where:(NSString* _Nullable)where complete:(ekw_complete_A)complete {
+- (void)queryObjectWithTableName:(NSString* _Nonnull)tablename class:(__unsafe_unretained _Nonnull Class)cla where:(NSString* _Nullable)where complete:(ekw_complete_A)complete {
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     @autoreleasepool {
         [self queryObjectQueueWithTableName:tablename class:cla where:where complete:complete];
@@ -158,7 +158,7 @@ static EKWDB* EKWdb = nil;
     dispatch_semaphore_signal(self.semaphore);
 }
 
--(void)queryObjectQueueWithTableName:(NSString* _Nonnull)tablename class:(__unsafe_unretained _Nonnull Class)cla where:(NSString* _Nullable)where complete:(ekw_complete_A)complete {
+- (void)queryObjectQueueWithTableName:(NSString* _Nonnull)tablename class:(__unsafe_unretained _Nonnull Class)cla where:(NSString* _Nullable)where complete:(ekw_complete_A)complete {
     //检查是否建立了跟对象相对应的数据表
     __weak typeof(self) BGSelf = self;
     [self isExistWithTableName:tablename complete:^(BOOL isExist) {
@@ -177,7 +177,7 @@ static EKWDB* EKWdb = nil;
 /**
  直接传入条件sql语句查询
  */
--(void)queryWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_A)complete {
+- (void)queryWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_A)complete {
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     @autoreleasepool {
         [self queryQueueWithTableName:name conditions:conditions complete:complete];
@@ -187,13 +187,13 @@ static EKWDB* EKWdb = nil;
 
 
 #pragma mark - 删除
--(void)deleteWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_B)complete {
+- (void)deleteWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_B)complete {
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     [self deleteQueueWithTableName:name conditions:conditions complete:complete];
     dispatch_semaphore_signal(self.semaphore);
 }
 
--(void)deleteQueueWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_B)complete{
+- (void)deleteQueueWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_B)complete{
     NSAssert(name,@"表名不能为空!");
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
@@ -208,7 +208,7 @@ static EKWDB* EKWdb = nil;
 /**
  批量插入或更新
  */
--(void)ekw_saveOrUpateArray:(NSArray* _Nonnull)array ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(ekw_complete_B)complete {
+- (void)ekw_saveOrUpateArray:(NSArray* _Nonnull)array ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(ekw_complete_B)complete {
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     @autoreleasepool {
         //判断是否建表.
@@ -236,7 +236,7 @@ static EKWDB* EKWdb = nil;
 /**
  批量插入或更新.
  */
--(void)ekw_saveOrUpdateWithTableName:(NSString* _Nonnull)tablename class:(__unsafe_unretained _Nonnull Class)cla DictArray:(NSArray<NSDictionary*>* _Nonnull)dictArray complete:(ekw_complete_B)complete{
+- (void)ekw_saveOrUpdateWithTableName:(NSString* _Nonnull)tablename class:(__unsafe_unretained _Nonnull Class)cla DictArray:(NSArray<NSDictionary*>* _Nonnull)dictArray complete:(ekw_complete_B)complete{
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
         [db beginTransaction];
@@ -394,7 +394,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  存储一个对象.
  */
--(void)saveObject:(id _Nonnull)object ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(ekw_complete_B)complete {
+- (void)saveObject:(id _Nonnull)object ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(ekw_complete_B)complete {
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     @autoreleasepool {
         [EKWTool ifNotExistWillCreateTableWithObject:object ignoredKeys:ignoredKeys];
@@ -406,7 +406,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  处理插入的字典数据并返回
  */
--(void)insertWithObject:(id)object ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(ekw_complete_B)complete {
+- (void)insertWithObject:(id)object ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(ekw_complete_B)complete {
     NSDictionary *dictM = [EKWTool getDictWithObject:object ignoredKeys:ignoredKeys filtModelInfoType:ekw_ModelInfoInsert];
     //自动判断是否有字段改变，自动刷新数据库
     [self ifIvarChangeForObject:object ignoredKeys:ignoredKeys];
@@ -419,7 +419,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  判断类属性是否有改变,智能刷新.
  */
--(void)ifIvarChangeForObject:(id)object ignoredKeys:(NSArray*)ignoredkeys{
+- (void)ifIvarChangeForObject:(id)object ignoredKeys:(NSArray*)ignoredkeys{
     //获取缓存的属性信息
     NSCache* cache = [NSCache ekw_cache];
     //zx
@@ -507,7 +507,7 @@ NSString* ekw_sqlValue(id value) {
     }
 }
 
--(void)refreshQueueTable:(NSString* _Nonnull)name class:(__unsafe_unretained _Nonnull Class)cla keys:(NSArray<NSString*>* const _Nonnull)keys complete:(ekw_complete_I)complete{
+- (void)refreshQueueTable:(NSString* _Nonnull)name class:(__unsafe_unretained _Nonnull Class)cla keys:(NSArray<NSString*>* const _Nonnull)keys complete:(ekw_complete_I)complete{
     NSAssert(name,@"表名不能为空!");
     NSAssert(keys,@"字段数组不能为空!");
     [self isExistWithTableName:name complete:^(BOOL isSuccess){
@@ -553,7 +553,7 @@ NSString* ekw_sqlValue(id value) {
     }
 }
 
--(void)copyA:(NSString* _Nonnull)A toB:(NSString* _Nonnull)B class:(__unsafe_unretained _Nonnull Class)cla keys:(NSArray<NSString*>* const _Nonnull)keys complete:(ekw_complete_I)complete{
+- (void)copyA:(NSString* _Nonnull)A toB:(NSString* _Nonnull)B class:(__unsafe_unretained _Nonnull Class)cla keys:(NSArray<NSString*>* const _Nonnull)keys complete:(ekw_complete_I)complete{
     //获取"唯一约束"字段名
     NSArray* uniqueKeys = [EKWTool executeSelector:ekw_uniqueKeysSelector forClass:cla];
     //获取“联合主键”字段名
@@ -628,7 +628,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  插入数据.
  */
--(void)insertIntoTableName:(NSString* _Nonnull)name Dict:(NSDictionary* _Nonnull)dict complete:(ekw_complete_B)complete {
+- (void)insertIntoTableName:(NSString* _Nonnull)name Dict:(NSDictionary* _Nonnull)dict complete:(ekw_complete_B)complete {
     NSAssert(name,@"表名不能为空!");
     NSAssert(dict,@"插入值字典不能为空!");
     __block BOOL result;
@@ -681,7 +681,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  数据库中是否存在表.
  */
--(void)isExistWithTableName:(NSString* _Nonnull)name complete:(ekw_complete_B)complete {
+- (void)isExistWithTableName:(NSString* _Nonnull)name complete:(ekw_complete_B)complete {
     NSAssert(name, @"表名不能为空！");
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
@@ -693,7 +693,7 @@ NSString* ekw_sqlValue(id value) {
 /*
  执行事务操作
  */
--(void)executeTransation:(BOOL (^_Nonnull)(void))block{
+- (void)executeTransation:(BOOL (^_Nonnull)(void))block{
     [self executeDB:^(FMDatabase * _Nonnull db) {
         self.inTransaction = db.inTransaction;
         if (!self.inTransaction) {
@@ -748,7 +748,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  动态添加表字段.
  */
--(void)addTable:(NSString* _Nonnull)name key:(NSString* _Nonnull)key complete:(ekw_complete_B)complete{
+- (void)addTable:(NSString* _Nonnull)name key:(NSString* _Nonnull)key complete:(ekw_complete_B)complete{
     NSAssert(name,@"表名不能为空!");
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
@@ -762,7 +762,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  删除表.
  */
--(void)dropTable:(NSString* _Nonnull)name complete:(ekw_complete_B)complete{
+- (void)dropTable:(NSString* _Nonnull)name complete:(ekw_complete_B)complete{
     NSAssert(name,@"表名不能为空!");
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
@@ -778,7 +778,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  查询对象.
  */
--(void)queryWithTableName:(NSString* _Nonnull)name where:(NSString* _Nullable)where complete:(ekw_complete_A)complete{
+- (void)queryWithTableName:(NSString* _Nonnull)name where:(NSString* _Nullable)where complete:(ekw_complete_A)complete{
     NSAssert(name,@"表名不能为空!");
     NSMutableArray* arrM = [[NSMutableArray alloc] init];
     [self executeDB:^(FMDatabase * _Nonnull db) {
@@ -806,7 +806,7 @@ NSString* ekw_sqlValue(id value) {
     ekw_completeBlock(arrM);
 }
 
--(void)queryQueueWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_A)complete {
+- (void)queryQueueWithTableName:(NSString* _Nonnull)name conditions:(NSString* _Nullable)conditions complete:(ekw_complete_A)complete {
     NSAssert(name,@"表名不能为空!");
     __block NSMutableArray* arrM = nil;
     [self executeDB:^(FMDatabase * _Nonnull db){
@@ -837,7 +837,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  为了对象层的事物操作而封装的函数.
  */
--(void)executeDB:(void (^_Nonnull)(FMDatabase *_Nonnull db))block {
+- (void)executeDB:(void (^_Nonnull)(FMDatabase *_Nonnull db))block {
     NSAssert(block, @"block 是空的！");
     
     if (_db) { //为了事务操作防止死锁而设置.
@@ -869,7 +869,7 @@ NSString* ekw_sqlValue(id value) {
 /**
  关闭数据库.
  */
--(void)closeDB {
+- (void)closeDB {
     if (_disableCloseDB) return;
     
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
