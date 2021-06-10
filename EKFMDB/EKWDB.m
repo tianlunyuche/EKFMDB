@@ -9,6 +9,8 @@
 #import "EKWDB.h"
 #import "EKWTool.h"
 #import "NSCache+EKWCache.h"
+#import "CipherGenerator.h"
+
 /**
  默认数据库名称
  */
@@ -24,6 +26,7 @@
 @property (nonatomic, strong) FMDatabaseQueue *queue;
 @property (nonatomic, strong) FMDatabase *db;
 @property (nonatomic, assign) BOOL inTransaction;
+@property (nonatomic, copy) NSString *dbPath;
 
 @end
 
@@ -37,6 +40,7 @@ static EKWDB* EKWdb = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         EKWdb = [[EKWDB alloc]init];
+        EKWdb.encryptionKey = [CipherGenerator cipherEncrypt];
     });
     return EKWdb;
 }
@@ -46,6 +50,7 @@ static EKWDB* EKWdb = nil;
     if (self) {
         //创建信号量.
         self.semaphore = dispatch_semaphore_create(1);
+        self.encryptionKey = [CipherGenerator cipherEncrypt];
     }
     return self;
 }
@@ -63,6 +68,11 @@ static EKWDB* EKWdb = nil;
 
 -(FMDatabaseQueue *)queue{
     if(_queue)return _queue;
+    _queue = [FMDatabaseQueue databaseQueueWithPath:self.dbPath];
+    return _queue;
+}
+
+- (NSString *)dbPath {
     //获得沙盒中的数据库文件名
     NSString* name;
     if(_sqliteName) {
@@ -70,10 +80,8 @@ static EKWDB* EKWdb = nil;
     }else{
         name = SQLITE_NAME;
     }
-    NSString *filename = CachePath(name);
-//    NSLog(@"数据库路径 = %@",filename);
-    _queue = [FMDatabaseQueue databaseQueueWithPath:filename];
-    return _queue;
+    NSString *dbPath = CachePath(name);
+    return  dbPath;
 }
 
 /**
@@ -687,7 +695,7 @@ NSString* ekw_sqlValue(id value) {
  */
 -(void)executeTransation:(BOOL (^_Nonnull)(void))block{
     [self executeDB:^(FMDatabase * _Nonnull db) {
-        self.inTransaction = db.isInTransaction;
+        self.inTransaction = db.inTransaction;
         if (!self.inTransaction) {
             self.inTransaction = [db beginTransaction];
         }
@@ -835,6 +843,19 @@ NSString* ekw_sqlValue(id value) {
     if (_db) { //为了事务操作防止死锁而设置.
         block(_db);
         return;
+    } else {
+        if (_queue == nil) {
+            self.queue = [FMDatabaseQueue databaseQueueWithPath:self.dbPath];
+            [_queue inDatabase:^(FMDatabase *db) {
+#ifdef DEBUG
+                    // debug模式下打印错误日志
+                    db.logsErrors = YES;
+#endif
+                if (_encryptionKey.length > 0) {
+                    [db setKey:_encryptionKey];
+                }
+            }];
+        }
     }
     __weak typeof(self) weakSelf = self;
     [self.queue inDatabase:^(FMDatabase * _Nonnull db) {

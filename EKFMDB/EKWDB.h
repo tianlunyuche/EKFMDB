@@ -25,6 +25,9 @@
  */
 @property(nonatomic,copy)NSString* _Nonnull sqliteName;
 
+//encryption Key
+@property(strong,nonatomic)NSString * _Nonnull encryptionKey;
+
 /**
  获取单例函数.
  */

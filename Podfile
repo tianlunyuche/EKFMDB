@@ -1,14 +1,10 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/aliyun/aliyun-specs.git'
-
-project '/Volumes/MacData/MacData/projects/EKFMDB/EKFMDB.xcodeproj'
+project '/Users/apple/Desktop/zzx/EKFMDB/EKFMDB.xcodeproj'
 
 target 'EKFMDB' do
 
- use_frameworks!
-
-    pod 'FMDB'
-
+  pod 'FMDB', '~> 2.6.2'
+  pod 'FMDB/SQLCipher'
+  
 end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18ED5B5A2671FED100CF8075 /* CipherGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ED5B582671FED100CF8075 /* CipherGenerator.m */; };
+		18ED5B5B2671FED100CF8075 /* CipherGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 18ED5B592671FED100CF8075 /* CipherGenerator.h */; };
 		221DA7E3225EEE1A0068FCC8 /* EKFMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7E1225EEE1A0068FCC8 /* EKFMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		221DA7F3225EEE380068FCC8 /* EKWDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7E9225EEE370068FCC8 /* EKWDB.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		221DA7F4225EEE380068FCC8 /* EKWTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7EA225EEE370068FCC8 /* EKWTool.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -17,11 +19,13 @@
 		221DA7F9225EEE380068FCC8 /* EKWTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DA7EF225EEE380068FCC8 /* EKWTool.m */; };
 		221DA7FB225EEE380068FCC8 /* EKWDBConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		221DA7FC225EEE380068FCC8 /* NSCache+EKWCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */; };
-		78B70523862FC92B4700CA87 /* Pods_EKFMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5C5C24BDFED93FD395E7E1 /* Pods_EKFMDB.framework */; };
+		9228D0A55CE7288000F62CDA /* libPods-EKFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 231860B14F5C440400835CE0 /* libPods-EKFMDB.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14D55B0519386C26FA631057 /* Pods-EKFMDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKFMDB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EKFMDB/Pods-EKFMDB.debug.xcconfig"; sourceTree = "<group>"; };
+		18ED5B582671FED100CF8075 /* CipherGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CipherGenerator.m; sourceTree = "<group>"; };
+		18ED5B592671FED100CF8075 /* CipherGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CipherGenerator.h; sourceTree = "<group>"; };
 		221DA7DE225EEE1A0068FCC8 /* EKFMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EKFMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		221DA7E1225EEE1A0068FCC8 /* EKFMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EKFMDB.h; sourceTree = "<group>"; };
 		221DA7E2225EEE1A0068FCC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -34,7 +38,7 @@
 		221DA7EF225EEE380068FCC8 /* EKWTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKWTool.m; sourceTree = "<group>"; };
 		221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKWDBConfig.h; sourceTree = "<group>"; };
 		221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCache+EKWCache.m"; sourceTree = "<group>"; };
-		4B5C5C24BDFED93FD395E7E1 /* Pods_EKFMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EKFMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		231860B14F5C440400835CE0 /* libPods-EKFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EKFMDB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		99CFE593D3C7E54E782E0354 /* Pods-EKFMDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKFMDB.release.xcconfig"; path = "Pods/Target Support Files/Pods-EKFMDB/Pods-EKFMDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,13 +47,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78B70523862FC92B4700CA87 /* Pods_EKFMDB.framework in Frameworks */,
+				9228D0A55CE7288000F62CDA /* libPods-EKFMDB.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18ED5B092671EDCF00CF8075 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				221DA7EA225EEE370068FCC8 /* EKWTool.h */,
+				221DA7EF225EEE380068FCC8 /* EKWTool.m */,
+				221DA7EE225EEE380068FCC8 /* NSCache+EKWCache.h */,
+				221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */,
+				221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */,
+				18ED5B592671FED100CF8075 /* CipherGenerator.h */,
+				18ED5B582671FED100CF8075 /* CipherGenerator.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		221DA7D4225EEE1A0068FCC8 = {
 			isa = PBXGroup;
 			children = (
@@ -71,13 +89,9 @@
 		221DA7E0225EEE1A0068FCC8 /* EKFMDB */ = {
 			isa = PBXGroup;
 			children = (
+				18ED5B092671EDCF00CF8075 /* Utils */,
 				221DA7E9225EEE370068FCC8 /* EKWDB.h */,
 				221DA7EB225EEE370068FCC8 /* EKWDB.m */,
-				221DA7F1225EEE380068FCC8 /* EKWDBConfig.h */,
-				221DA7EA225EEE370068FCC8 /* EKWTool.h */,
-				221DA7EF225EEE380068FCC8 /* EKWTool.m */,
-				221DA7EE225EEE380068FCC8 /* NSCache+EKWCache.h */,
-				221DA7F2225EEE380068FCC8 /* NSCache+EKWCache.m */,
 				221DA7EC225EEE380068FCC8 /* NSObject+EKWModel.h */,
 				221DA7ED225EEE380068FCC8 /* NSObject+EKWModel.m */,
 				221DA7E1225EEE1A0068FCC8 /* EKFMDB.h */,
@@ -98,7 +112,7 @@
 		87F11586B4A11994A4AAF957 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4B5C5C24BDFED93FD395E7E1 /* Pods_EKFMDB.framework */,
+				231860B14F5C440400835CE0 /* libPods-EKFMDB.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -111,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				221DA7FB225EEE380068FCC8 /* EKWDBConfig.h in Headers */,
+				18ED5B5B2671FED100CF8075 /* CipherGenerator.h in Headers */,
 				221DA7F6225EEE380068FCC8 /* NSObject+EKWModel.h in Headers */,
 				221DA7F3225EEE380068FCC8 /* EKWDB.h in Headers */,
 				221DA7F4225EEE380068FCC8 /* EKWTool.h in Headers */,
@@ -131,7 +146,6 @@
 				221DA7DA225EEE1A0068FCC8 /* Sources */,
 				221DA7DB225EEE1A0068FCC8 /* Frameworks */,
 				221DA7DC225EEE1A0068FCC8 /* Resources */,
-				E8481B2FAE3774368BED3AEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -184,21 +198,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E8481B2FAE3774368BED3AEB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EKFMDB/Pods-EKFMDB-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F688F16CFEBDF3E8318F0545 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				221DA7FC225EEE380068FCC8 /* NSCache+EKWCache.m in Sources */,
+				18ED5B5A2671FED100CF8075 /* CipherGenerator.m in Sources */,
 				221DA7F5225EEE380068FCC8 /* EKWDB.m in Sources */,
 				221DA7F9225EEE380068FCC8 /* EKWTool.m in Sources */,
 				221DA7F7225EEE380068FCC8 /* NSObject+EKWModel.m in Sources */,
@@ -286,7 +286,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -342,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -365,11 +365,13 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = EKFMDB/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = moyi.EKFMDB;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -390,11 +392,13 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = EKFMDB/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = moyi.EKFMDB;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
