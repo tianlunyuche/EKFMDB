@@ -1,14 +1,28 @@
 PODS:
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/SQLCipher (2.6.2):
+    - SQLCipher
+  - FMDB/standard (2.6.2)
+  - SQLCipher (4.4.3):
+    - SQLCipher/standard (= 4.4.3)
+  - SQLCipher/common (4.4.3)
+  - SQLCipher/standard (4.4.3):
+    - SQLCipher/common
 
 DEPENDENCIES:
-  - FMDB
+  - FMDB (~> 2.6.2)
+  - FMDB/SQLCipher
+
+SPEC REPOS:
+  trunk:
+    - FMDB
+    - SQLCipher
 
 SPEC CHECKSUMS:
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  SQLCipher: 155ffeafc9ac102e5c9b68e3e9a1297a98a27096
 
-PODFILE CHECKSUM: f35da7cecf19a77cd2101cddc1a97e7fac93d542
+PODFILE CHECKSUM: 2a55c90265ffab18c71d6f41efd05381f475e518
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.10.1

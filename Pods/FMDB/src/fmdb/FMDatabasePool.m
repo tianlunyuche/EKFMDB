@@ -15,18 +15,7 @@
 #import "FMDatabasePool.h"
 #import "FMDatabase.h"
 
-typedef NS_ENUM(NSInteger, FMDBTransaction) {
-    FMDBTransactionExclusive,
-    FMDBTransactionDeferred,
-    FMDBTransactionImmediate,
-};
-
-@interface FMDatabasePool () {
-    dispatch_queue_t    _lockQueue;
-    
-    NSMutableArray      *_databaseInPool;
-    NSMutableArray      *_databaseOutPool;
-}
+@interface FMDatabasePool()
 
 - (void)pushDatabaseBackInPool:(FMDatabase*)db;
 - (FMDatabase*)db;
@@ -41,27 +30,15 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
 @synthesize openFlags=_openFlags;
 
 
-+ (instancetype)databasePoolWithPath:(NSString *)aPath {
++ (instancetype)databasePoolWithPath:(NSString*)aPath {
     return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath]);
 }
 
-+ (instancetype)databasePoolWithURL:(NSURL *)url {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:url.path]);
-}
-
-+ (instancetype)databasePoolWithPath:(NSString *)aPath flags:(int)openFlags {
++ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags {
     return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags]);
 }
 
-+ (instancetype)databasePoolWithURL:(NSURL *)url flags:(int)openFlags {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:url.path flags:openFlags]);
-}
-
-- (instancetype)initWithURL:(NSURL *)url flags:(int)openFlags vfs:(NSString *)vfsName {
-    return [self initWithPath:url.path flags:openFlags vfs:vfsName];
-}
-
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName {
+- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
     
     self = [super init];
     
@@ -71,36 +48,21 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
         _databaseInPool     = FMDBReturnRetained([NSMutableArray array]);
         _databaseOutPool    = FMDBReturnRetained([NSMutableArray array]);
         _openFlags          = openFlags;
-        _vfsName            = [vfsName copy];
     }
     
     return self;
 }
 
-- (instancetype)initWithPath:(NSString *)aPath flags:(int)openFlags {
-    return [self initWithPath:aPath flags:openFlags vfs:nil];
-}
-
-- (instancetype)initWithURL:(NSURL *)url flags:(int)openFlags {
-    return [self initWithPath:url.path flags:openFlags vfs:nil];
-}
-
-- (instancetype)initWithPath:(NSString*)aPath {
+- (instancetype)initWithPath:(NSString*)aPath
+{
     // default flags for sqlite3_open
     return [self initWithPath:aPath flags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE];
-}
-
-- (instancetype)initWithURL:(NSURL *)url {
-    return [self initWithPath:url.path];
 }
 
 - (instancetype)init {
     return [self initWithPath:nil];
 }
 
-+ (Class)databaseClass {
-    return [FMDatabase class];
-}
 
 - (void)dealloc {
     
@@ -108,7 +70,6 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
     FMDBRelease(_path);
     FMDBRelease(_databaseInPool);
     FMDBRelease(_databaseOutPool);
-    FMDBRelease(_vfsName);
     
     if (_lockQueue) {
         FMDBDispatchQueueRelease(_lockQueue);
@@ -167,13 +128,13 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
                 }
             }
             
-            db = [[[self class] databaseClass] databaseWithPath:self->_path];
+            db = [FMDatabase databaseWithPath:self->_path];
             shouldNotifyDelegate = YES;
         }
         
         //This ensures that the db is opened before returning
 #if SQLITE_VERSION_NUMBER >= 3005000
-        BOOL success = [db openWithFlags:self->_openFlags vfs:self->_vfsName];
+        BOOL success = [db openWithFlags:self->_openFlags];
 #else
         BOOL success = [db open];
 #endif
@@ -241,7 +202,7 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
     }];
 }
 
-- (void)inDatabase:(__attribute__((noescape)) void (^)(FMDatabase *db))block {
+- (void)inDatabase:(void (^)(FMDatabase *db))block {
     
     FMDatabase *db = [self db];
     
@@ -250,22 +211,17 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
     [self pushDatabaseBackInPool:db];
 }
 
-- (void)beginTransaction:(FMDBTransaction)transaction withBlock:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(FMDatabase *db, BOOL *rollback))block {
     
     BOOL shouldRollback = NO;
     
     FMDatabase *db = [self db];
     
-    switch (transaction) {
-        case FMDBTransactionExclusive:
-            [db beginTransaction];
-            break;
-        case FMDBTransactionDeferred:
-            [db beginDeferredTransaction];
-            break;
-        case FMDBTransactionImmediate:
-            [db beginImmediateTransaction];
-            break;
+    if (useDeferred) {
+        [db beginDeferredTransaction];
+    }
+    else {
+        [db beginTransaction];
     }
     
     
@@ -281,23 +237,15 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
     [self pushDatabaseBackInPool:db];
 }
 
-- (void)inTransaction:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block {
-    [self beginTransaction:FMDBTransactionExclusive withBlock:block];
+- (void)inDeferredTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
+    [self beginTransaction:YES withBlock:block];
 }
 
-- (void)inDeferredTransaction:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block {
-    [self beginTransaction:FMDBTransactionDeferred withBlock:block];
+- (void)inTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
+    [self beginTransaction:NO withBlock:block];
 }
 
-- (void)inExclusiveTransaction:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block {
-    [self beginTransaction:FMDBTransactionExclusive withBlock:block];
-}
-
-- (void)inImmediateTransaction:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block {
-    [self beginTransaction:FMDBTransactionImmediate withBlock:block];
-}
-
-- (NSError*)inSavePoint:(__attribute__((noescape)) void (^)(FMDatabase *db, BOOL *rollback))block {
+- (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block {
 #if SQLITE_VERSION_NUMBER >= 3007000
     static unsigned long savePointIdx = 0;
     
@@ -326,7 +274,7 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
     
     return err;
 #else
-    NSString *errorMessage = NSLocalizedStringFromTable(@"Save point functions require SQLite 3.7", @"FMDB", nil);
+    NSString *errorMessage = NSLocalizedString(@"Save point functions require SQLite 3.7", nil);
     if (self.logsErrors) NSLog(@"%@", errorMessage);
     return [NSError errorWithDomain:@"FMDatabase" code:0 userInfo:@{NSLocalizedDescriptionKey : errorMessage}];
 #endif

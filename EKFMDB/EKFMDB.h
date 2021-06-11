@@ -17,3 +17,4 @@ FOUNDATION_EXPORT const unsigned char EKFMDBVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <EKFMDB/PublicHeader.h>
 
 #import "NSObject+EKWModel.h"
+#import "EKWDB.h"

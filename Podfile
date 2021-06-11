@@ -4,7 +4,7 @@ project '/Users/apple/Desktop/zzx/EKFMDB/EKFMDB.xcodeproj'
 
 target 'EKFMDB' do
 
-  pod 'FMDB', '~> 2.6.2'
+  pod 'FMDB'
   pod 'FMDB/SQLCipher'
   
 end
